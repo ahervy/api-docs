@@ -1,0 +1,120 @@
+---
+title: Weather conditions and icons
+description: Learn about the different weather conditions and icons available in the Current Weather Data API, and how to use them in your applications.
+---
+
+The Current Weather Data API provides detailed weather data, including weather conditions and corresponding icons, for any location worldwide.
+
+Understanding these weather conditions and icons is essential for building apps that display accurate and visually appealing weather data to users.
+
+
+```JSON Example of API response
+... 
+  "weather": [
+	{
+	  "id": 500,
+	  "main":"Rain",
+	  "description": "light rain",
+	  "icon": "10n"
+	}
+  ],
+...
+```
+
+## Weather icons
+
+The Current Weather Data API provides weather icons that represent different weather conditions.
+These icons can be displayed in your apps to provide users with a visual representation of the current weather.
+
+To retrieve the URL for a specific weather icon, use the following format:
+
+`https://openweathermap.org/img/wn/{{ICON_CODE}}.png`
+
+Replace `{ICON_CODE}` with the appropriate icon code from the API response (for example, `10n` for light rain).
+
+The following sections include full lists of icon and weather condition codes.
+
+### Icon list
+
+| Day Icon | Night Icon | Description |
+| --- | --- | --- |
+| <img src="https://openweathermap.org/img/wn/01d.png" noZoom/> <code>01d</code> | <img src="https://openweathermap.org/img/wn/01n.png" noZoom/> <code>01n</code> | Clear sky |
+| <img src="https://openweathermap.org/img/wn/02d.png" noZoom/> <code>02d</code> | <img src="https://openweathermap.org/img/wn/02n.png" noZoom/> <code>02n</code> | Few clouds |
+| <img src="https://openweathermap.org/img/wn/03d.png" noZoom/> <code>03d</code> | <img src="https://openweathermap.org/img/wn/03n.png" noZoom/> <code>03n</code> | Scattered clouds |
+| <img src="https://openweathermap.org/img/wn/04d.png" noZoom/> <code>04d</code> | <img src="https://openweathermap.org/img/wn/04n.png" noZoom/> <code>04n</code> | Broken clouds |
+| <img src="https://openweathermap.org/img/wn/09d.png" noZoom/> <code>09d</code> | <img src="https://openweathermap.org/img/wn/09n.png" noZoom/> <code>09n</code> | Shower rain |
+| <img src="https://openweathermap.org/img/wn/10d.png" noZoom/> <code>10d</code> | <img src="https://openweathermap.org/img/wn/10n.png" noZoom/> <code>10n</code> | Rain |
+| <img src="https://openweathermap.org/img/wn/11d.png" noZoom/> <code>11d</code> | <img src="https://openweathermap.org/img/wn/11n.png" noZoom/> <code>11n</code> | Thunderstorm |
+| <img src="https://openweathermap.org/img/wn/13d.png" noZoom/> <code>13d</code> | <img src="https://openweathermap.org/img/wn/13n.png" noZoom/> <code>13n</code> | Snow |
+| <img src="https://openweathermap.org/img/wn/50d.png" noZoom/> <code>50d</code> | <img src="https://openweathermap.org/img/wn/50n.png" noZoom/> <code>50n</code> | Mist |
+
+### Weather condition codes
+
+The Current Weather Data API uses numerical codes to represent different weather conditions.
+These codes are grouped based on the type of weather condition.
+
+#### Group 2xx: Thunderstorm
+
+This group represents various types of thunderstorms.
+
+| Code | Description | Icon |
+| --- | --- | --- |
+| 200 | Thunderstorm with light rain | <img src="https://openweathermap.org/img/wn/11d.png" noZoom/> <code>11d</code> |
+| 201 | Thunderstorm with rain | <img src="https://openweathermap.org/img/wn/11d.png" noZoom/> <code>11d</code> |
+| 202 | Thunderstorm with heavy rain | <img src="https://openweathermap.org/img/wn/11d.png" noZoom/> <code>11d</code> |
+| 210 | Light thunderstorm | <img src="https://openweathermap.org/img/wn/11d.png" noZoom/> <code>11d</code> |
+| 211 | Thunderstorm | <img src="https://openweathermap.org/img/wn/11d.png" noZoom/> <code>11d</code> |
+| 212 | Heavy thunderstorm | <img src="https://openweathermap.org/img/wn/11d.png" noZoom/> <code>11d</code> |
+| 221 | Ragged thunderstorm | <img src="https://openweathermap.org/img/wn/11d.png" noZoom/> <code>11d</code> |
+| 230 | Thunderstorm with light drizzle | <img src="https://openweathermap.org/img/wn/11d.png" noZoom/> <code>11d</code> |
+| 231 | Thunderstorm with drizzle | <img src="https://openweathermap.org/img/wn/11d.png" noZoom/> <code>11d</code> |
+| 232 | Thunderstorm with heavy drizzle | <img src="https://openweathermap.org/img/wn/11d.png" noZoom/> <code>11d</code> |
+
+#### Group 3xx: Drizzle
+
+This group represents various types of drizzles as well as combinations with rain.
+
+| Code | Description | Icon |
+| --- | --- | --- |
+| 300 | Light intensity drizzle | <img src="https://openweathermap.org/img/wn/09d.png" noZoom/> <code>09d</code> |
+| 301 | Drizzle | <img src="https://openweathermap.org/img/wn/09d.png" noZoom/> <code>09d</code> |
+| 302 | Heavy intensity drizzle | <img src="https://openweathermap.org/img/wn/09d.png" noZoom/> <code>09d</code> |
+| 310 | Light intensity drizzle rain | <img src="https://openweathermap.org/img/wn/09d.png" noZoom/> <code>09d</code> |
+| 311 | Drizzle rain | <img src="https://openweathermap.org/img/wn/09d.png" noZoom/> <code>09d</code> |
+| 312 | Heavy intensity drizzle rain | <img src="https://openweathermap.org/img/wn/09d.png" noZoom/> <code>09d</code> |
+| 313 | Shower rain and drizzle | <img src="https://openweathermap.org/img/wn/09d.png" noZoom/> <code>09d</code> |
+| 314 | Heavy shower rain and drizzle | <img src="https://openweathermap.org/img/wn/09d.png" noZoom/> <code>09d</code> |
+| 321 | Shower drizzle | <img src="https://openweathermap.org/img/wn/09d.png" noZoom/>
+
+#### Group 7xx: Atmosphere
+This group represents various types of atmospheric conditions.
+
+| Code | Description | Icon |
+| --- | --- | --- |
+| 701 | Mist | <img src="https://openweathermap.org/img/wn/50d.png" noZoom/> <code>50d</code> |
+| 711 | Smoke | <img src="https://openweathermap.org/img/wn/50d.png" noZoom/> <code>50d</code> |
+| 721 | Haze | <img src="https://openweathermap.org/img/wn/50d.png" noZoom/> <code>50d</code> |
+| 731 | Sand/dust whirls | <img src="https://openweathermap.org/img/wn/50d.png" noZoom/> <code>50d</code> |
+| 741 | Fog | <img src="https://openweathermap.org/img/wn/50d.png" noZoom/> <code>50d</code> |
+| 751 | Sand | <img src="https://openweathermap.org/img/wn/50d.png" noZoom/> <code>50d</code> |
+| 761 | Dust | <img src="https://openweathermap.org/img/wn/50d.png" noZoom/> <code>50d</code> |
+| 762 | Volcanic ash | <img src="https://openweathermap.org/img/wn/50d.png" noZoom/> <code>50d</code> |
+| 771 | Squalls | <img src="https://openweathermap.org/img/wn/50d.png" noZoom/> <code>50d</code> |
+| 781 | Tornado | <img src="https://openweathermap.org/img/wn/50d.png" noZoom/> <code>50d</code> |
+
+#### Group 800: Clear
+This group represents clear sky conditions.
+
+| Code | Description | Icon |
+| --- | --- | --- |
+| 800 | Clear sky | <img src="https://openweathermap.org/img/wn/01d.png" noZoom/> <code>01d</code> <img src="https://openweathermap.org/img/wn/01n.png" noZoom/> <code>01n</code> |
+
+#### Group 80x: Clouds
+This group represents cloud cover conditions.
+
+| Code | Description | Icon |
+| --- | --- | --- |
+| 801 | Few clouds: 11-25% | <img src="https://openweathermap.org/img/wn/02d.png" noZoom/> <code>02d</code> <img src="https://openweathermap.org/img/wn/02n.png" noZoom/> <code>02n</code> |
+| 802 | Scattered clouds: 25-50% | <img src="https://openweathermap.org/img/wn/03d.png" noZoom/> <code>03d</code> <img src="https://openweathermap.org/img/wn/03n.png" noZoom/> <code>03n</code> |
+| 803 | Broken clouds: 51-84% | <img src="https://openweathermap.org/img/wn/04d.png" noZoom/> <code>04d</code> <img src="https://openweathermap.org/img/wn/04n.png" noZoom/> <code>04n</code> |
+| 804 | Overcast clouds: 85-100% | <img src="https://openweathermap.org/img/wn/04d.png" noZoom/> <code>04d</code> <img src="https://openweathermap.org/img/wn/04n.png" noZoom/> <code>04n</code> |

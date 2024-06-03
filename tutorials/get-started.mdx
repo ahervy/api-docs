@@ -1,0 +1,127 @@
+---
+title: Make your first API call
+description: 'Learn how to call the Current Weather Data API.'
+---
+
+The Current Weather Data API provides access to weather data for any location worldwide.
+In this tutorial, you will make your first call to the the Current Weather Data API.
+
+<Steps titleSize="h2">
+  <Step title="Create an account">
+  To get started with the Current Weather Data API, you need to create a personal account.
+
+    1. Go to https://home.openweathermap.org/users/sign_up.
+    2. Fill in the form with the required info.
+    3. Click **Create account**.
+    4. In the confirmation email, click **Verify your email**.\
+    Without a verified email address, you won't be able to use the Current Weather Data API.
+
+    Once your email address has been successfully confirmed, you can [sign in to your account](https://openweathermap.org/home/sign_in).
+  </Step>
+  <Step title="Get an API key">
+  When your account is created, an API key is generated. You need this API key to call the Current Weather Data API.
+
+    1. [Sign in to your account](https://openweathermap.org/home/sign_in).
+    2. In the top menu, click your name > **My API keys**.
+    
+    Your API key is listed under the **Key** column.
+
+    <Info>Make sure the status of your API key is **Active**. If the status is **Inactive**, click the toggle icon to activate your API key.</Info>
+  </Step>
+  <Step title="Make your first call">
+  Now that you have your API key, you are ready to make your first call to the Current Weather Data API.
+  
+  The following example shows how to get the current weather in Paris, France, using cURL in a terminal.
+
+    1. Open your terminal.
+    2. Copy and paste the following code snippet.\
+       Replace `API_KEY` with your API key from Step 2.
+        ```curl
+        curl --request GET \
+        --url 'https://api.openweathermap.org/data/2.5/weather?lat=48.8534&lon=2.3488&appid=API_KEY'
+        ```
+        The URL `https://api.openweathermap.org/data/2.5/weather` is the endpoint for the Current Weather Data API.\
+        The `lat` and `lon` parameters specify the geographic coordinates for the location you want to retrieve weather data for. In this example, we're using the coordinates for Paris, France.\
+        The `appid` parameter is where you need to provide your API key.
+  
+  The JSON response should look something like this:
+        ```JSON
+        {
+            "coord": {
+                "lon": 2.3488,
+                "lat": 48.8534
+            },
+            "weather": [
+                {
+                    "id": 803,
+                    "main": "Clouds",
+                    "description": "broken clouds",
+                    "icon": "04d"
+                }
+            ],
+            "base": "stations",
+            "main": {
+                "temp": 289.28,
+                "feels_like": 288.7,
+                "temp_min": 288.21,
+                "temp_max": 291.69,
+                "pressure": 1022,
+                "humidity": 67
+            },
+            "visibility": 10000,
+            "wind": {
+                "speed": 2.57,
+                "deg": 40
+            },
+            "clouds": {
+                "all": 75
+            },
+            "dt": 1717406455,
+            "sys": {
+                "type": 2,
+                "id": 2041230,
+                "country": "FR",
+                "sunrise": 1717386622,
+                "sunset": 1717444055
+            },
+            "timezone": 7200,
+            "id": 2988507,
+            "name": "Paris",
+            "cod": 200
+        }
+        ```
+  Let's have a look at the reponse:
+      * The `coord` object includes the longitude (`lon`) and latitude (`lat`) of the location.
+
+      * The `weather` object includes the weather parameters for the location:
+    
+        * `id` is the weather condition identifier. For a full list of weather conditions identifiers, see .
+        * `main` corresponds to the group of weather parameters (`weather.main`).
+        * `description` is the weather condition.
+        * `icon` is the related weather icon . For a full list of weather icons, see .
+    
+      * The main object includes temperature and pressure info:
+    
+        * `temp` is the current Kelvin temperature.
+        * `feels_like` is the perceived temperature.
+        * `temp_min` and `temp_max` are the minimum and maximum temperatures at the moment, respectively.
+        Both temperatures are only available for large megalopolises and urban areas.
+      At the time of the API call, `289.28` is the Kelvin temperature (`main.temp`).
+    
+      * The `wind` object includes wind speed (`speed`) in meters/second and wind direction (`deg`) in degrees.
+
+      * The `clouds` object shows the cloudiness percentage (`all`).
+
+      * The `sys` object includes info about the location's country (`country`) as well as sunrise (`sunrise`) and sunset (`sunset`) times in Unix time (UTC).
+
+    For a detailed description of the API response, see <a href="/api-reference">the API reference documentation</a>.
+  </Step>
+  <Step title="Next steps">
+    You've successfully made your first call to the Current Weather Data API. You can now explore more features offered by the API, such as:
+
+    - Getting data in HTML and XML formats
+    - Getting data for imperial and metric systems of measurement
+  </Step>
+</Steps>
+
+
