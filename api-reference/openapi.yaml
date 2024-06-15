@@ -1,4 +1,4 @@
-openapi: 3.0.2
+openapi: 3.1.0
 info:
   title: Current Weather Data API
   description: Get the current weather for any location worldwide.
@@ -15,6 +15,8 @@ servers:
 paths:
   /weather:
     get:
+      tags:
+        - Weather
       operationId: getCurrentWeather
       summary: Get current weather data
       description: |
@@ -33,18 +35,74 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/WeatherData"
+              examples:
+                ParisWeather:
+                  summary: Weather Data for Paris, France
+                  value:
+                    coord:
+                      lon: 2.3488
+                      lat: 48.8534
+                    weather:
+                      - id: 803
+                        main: Clouds
+                        description: broken clouds
+                        icon: 04d
+                    base: stations
+                    main:
+                      temp: 289.28
+                      feels_like: 288.7
+                      temp_min: 288.21
+                      temp_max: 291.69
+                      pressure: 1022
+                      humidity: 67
+                    visibility: 10000
+                    wind:
+                      speed: 2.57
+                      deg: 40
+                    clouds:
+                      all: 75
+                    dt: 1717406455
+                    sys:
+                      type: 2
+                      id: 2041230
+                      country: FR
+                      sunrise: 1717386622
+                      sunset: 1717444055
+                    timezone: 7200
+                    id: 2988507
+                    name: Paris
+                    cod: 200
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/WeatherData"
+            text/html:
+              schema:
+                type: string
+                description: "HTML representation of the weather data, with values formatted for display."
         "400":
           description: Bad Request - Invalid request parameters
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+              examples:
+                invalidParameters:
+                  summary: Invalid input parameters
+                  value:
+                    cod: 400
+                    message: "Nothing to geocode"
         "401":
           description: Unauthorized - Invalid API key
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+              examples:
+                invalidApiKey:
+                  summary: Invalid API key
+                  value:
+                    cod: 401
+                    message: "Invalid API key. Please see https://openweathermap.org/faq#error401 for more info."
         "429":
           description: Too Many Requests - Rate limit exceeded
           content:
@@ -84,18 +142,22 @@ components:
       description: |
         Response format.
 
-        Default is `JSON` if you don't use the `mode` parameter.
+        Default is `json` if you don't use the `mode` parameter.
       required: false
       schema:
         type: string
-        enum: [html, xml]
+        enum: [html, json, xml]
     units:
       name: units
       in: query
       description: |
-        Units of measurement for temperature (Kelvin, Celsius, Fahrenheit), wind speed, and wind gust (meter/sec, miles/hour)
+        Units of measurement:
 
-        Default is `standard` (Kelvin, meter/sec) if you don't use the `units` parameter.
+        * `standard`: Kelvin for temperature, meter/sec for wind speed and wind gust
+        * `metric`: Celsius for temperature, meter/sec for wind speed and wind gust
+        * `imperial`: Fahrenheit for temperature, miles/hour for wind speed and wind gust
+
+        Default is `standard` if you don't use the `units` parameter.
       required: false
       schema:
         type: string
@@ -104,7 +166,7 @@ components:
       name: lang
       in: query
       description: |
-        Output language for the `weather.description` and `name` fields in the API response.
+        Output language for weather description (`weather.description`) and city name (`name`) fields in the API response.
 
         Available options:
 
@@ -158,6 +220,8 @@ components:
         * `uk`: Ukrainian
         * `vi`: Vietnamese
         * `zu`: Zulu
+
+        Default is English if you don't use the `lang` parameter.
       required: false
       schema:
         type: string
@@ -205,7 +269,7 @@ components:
               description: Temperature accounting for human perception
             pressure:
               type: integer
-              description: Atmospheric pressure on the sea level (hPa)
+              description: Atmospheric pressure at sea level (hPa)
             humidity:
               type: integer
               description: Humidity (%)
@@ -217,13 +281,13 @@ components:
               description: Maximum temperature at the moment (only for large megapolises and urban areas)
             sea_level:
               type: integer
-              description: Atmospheric pressure on the sea level (hPa)
+              description: Atmospheric pressure at sea level (hPa)
             grnd_level:
               type: integer
-              description: Atmospheric pressure on the ground level (hPa)
+              description: Atmospheric pressure at ground level (hPa)
         visibility:
           type: integer
-          description: Visibility, meters (maximum 10000)
+          description: Visibility (meters)
         wind:
           type: object
           properties:
@@ -244,22 +308,24 @@ components:
               description: Cloudiness (in percentage)
         rain:
           type: object
+          nullable: true
           properties:
             1h:
               type: number
-              description: Rain volume for the last 1 hour, mm (where available)
+              description: Rain volume for the last 1 hour (mm)
             3h:
               type: number
-              description: Rain volume for the last 3 hours, mm (where available)
+              description: Rain volume for the last 3 hours (mm)
         snow:
           type: object
+          nullable: true
           properties:
             1h:
               type: number
-              description: Snow volume for the last 1 hour, mm (where available)
+              description: Snow volume for the last 1 hour (mm)
             3h:
               type: number
-              description: Snow volume for the last 3 hours, mm (where available)
+              description: Snow volume for the last 3 hours (mm)
         dt:
           type: integer
           description: Time of data calculation, in Unix time (UTC)
@@ -295,16 +361,18 @@ components:
           description: City name
         cod:
           type: integer
-          description: HTTP code
+          description: API response status code
     Error:
       type: object
       properties:
         cod:
           type: integer
-          description: HTTP error code
+          description: API response error code
         message:
           type: string
           description: Description of the error code
-
 security:
   - apiKey: []
+tags:
+  - name: Weather
+    description: Operations related to weather data
