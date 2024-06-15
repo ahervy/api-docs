@@ -114,9 +114,13 @@ components:
       name: units
       in: query
       description: |
-        Units of measurement for temperature (Kelvin, Celsius, Fahrenheit), wind speed, and wind gust (meter/sec, miles/hour)
+        Units of measurement:
 
-        Default is `standard` (Kelvin, meter/sec) if you don't use the `units` parameter.
+        * `standard`: Kelvin for temperature, meter/sec for wind speed and wind gust
+        * `metric`: Celsius for temperature, meter/sec for wind speed and wind gust
+        * `imperial`: Fahrenheit for temperature, miles/hour for wind speed and wind gust
+
+        Default is `standard` if you don't use the `units` parameter.
       required: false
       schema:
         type: string
@@ -125,7 +129,7 @@ components:
       name: lang
       in: query
       description: |
-        Output language for the `weather.description` and `name` fields in the API response.
+        Output language for weather description (`weather.description`) and city name (`name`) fields in the API response.
 
         Available options:
 
@@ -226,7 +230,7 @@ components:
               description: Temperature accounting for human perception
             pressure:
               type: integer
-              description: Atmospheric pressure on the sea level (hPa)
+              description: Atmospheric pressure at sea level (hPa)
             humidity:
               type: integer
               description: Humidity (%)
@@ -238,13 +242,13 @@ components:
               description: Maximum temperature at the moment (only for large megapolises and urban areas)
             sea_level:
               type: integer
-              description: Atmospheric pressure on the sea level (hPa)
+              description: Atmospheric pressure at sea level (hPa)
             grnd_level:
               type: integer
-              description: Atmospheric pressure on the ground level (hPa)
+              description: Atmospheric pressure at ground level (hPa)
         visibility:
           type: integer
-          description: Visibility, meters (maximum 10000)
+          description: Visibility (meters)
         wind:
           type: object
           properties:
