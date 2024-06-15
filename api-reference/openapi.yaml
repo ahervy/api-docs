@@ -35,6 +35,43 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/WeatherData"
+              examples:
+                ParisWeather:
+                  summary: Weather Data for Paris, France
+                  value:
+                    coord:
+                      lon: 2.3488
+                      lat: 48.8534
+                    weather:
+                      - id: 803
+                        main: Clouds
+                        description: broken clouds
+                        icon: 04d
+                    base: stations
+                    main:
+                      temp: 289.28
+                      feels_like: 288.7
+                      temp_min: 288.21
+                      temp_max: 291.69
+                      pressure: 1022
+                      humidity: 67
+                    visibility: 10000
+                    wind:
+                      speed: 2.57
+                      deg: 40
+                    clouds:
+                      all: 75
+                    dt: 1717406455
+                    sys:
+                      type: 2
+                      id: 2041230
+                      country: FR
+                      sunrise: 1717386622
+                      sunset: 1717444055
+                    timezone: 7200
+                    id: 2988507
+                    name: Paris
+                    cod: 200
             application/xml:
               schema:
                 $ref: "#/components/schemas/WeatherData"
@@ -183,6 +220,8 @@ components:
         * `uk`: Ukrainian
         * `vi`: Vietnamese
         * `zu`: Zulu
+
+        Default is English if you don't use the `lang` parameter.
       required: false
       schema:
         type: string
@@ -322,13 +361,13 @@ components:
           description: City name
         cod:
           type: integer
-          description: HTTP code
+          description: API response status code
     Error:
       type: object
       properties:
         cod:
           type: integer
-          description: HTTP error code
+          description: API response error code
         message:
           type: string
           description: Description of the error code
