@@ -105,11 +105,11 @@ components:
       description: |
         Response format.
 
-        Default is `JSON` if you don't use the `mode` parameter.
+        Default is `json` if you don't use the `mode` parameter.
       required: false
       schema:
         type: string
-        enum: [html, xml]
+        enum: [html, json, xml]
     units:
       name: units
       in: query
@@ -265,22 +265,24 @@ components:
               description: Cloudiness (in percentage)
         rain:
           type: object
+          nullable: true
           properties:
             1h:
               type: number
-              description: Rain volume for the last 1 hour, mm (where available)
+              description: Rain volume for the last 1 hour (mm)
             3h:
               type: number
-              description: Rain volume for the last 3 hours, mm (where available)
+              description: Rain volume for the last 3 hours (mm)
         snow:
           type: object
+          nullable: true
           properties:
             1h:
               type: number
-              description: Snow volume for the last 1 hour, mm (where available)
+              description: Snow volume for the last 1 hour (mm)
             3h:
               type: number
-              description: Snow volume for the last 3 hours, mm (where available)
+              description: Snow volume for the last 3 hours (mm)
         dt:
           type: integer
           description: Time of data calculation, in Unix time (UTC)
