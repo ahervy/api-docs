@@ -1,4 +1,4 @@
-openapi: 3.0.2
+openapi: 3.1.0
 info:
   title: Current Weather Data API
   description: Get the current weather for any location worldwide.
@@ -15,6 +15,8 @@ servers:
 paths:
   /weather:
     get:
+      tags:
+        - Weather
       operationId: getCurrentWeather
       summary: Get current weather data
       description: |
@@ -33,6 +35,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/WeatherData"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/WeatherData"
+            text/html:
+              schema:
+                type: string
+                description: "HTML representation of the weather data, with values formatted for display."
         "400":
           description: Bad Request - Invalid request parameters
           content:
@@ -305,6 +314,8 @@ components:
         message:
           type: string
           description: Description of the error code
-
 security:
   - apiKey: []
+tags:
+  - name: Weather
+    description: Operations related to weather data
