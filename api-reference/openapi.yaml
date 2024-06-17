@@ -119,132 +119,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 components:
-  securitySchemes:
-    apiKey:
-      type: apiKey
-      in: query
-      name: appid
-  parameters:
-    lat:
-      name: lat
-      in: query
-      description: Latitude of the desired location
-      required: true
-      schema:
-        type: number
-        format: float
-        minimum: -90
-        maximum: 90
-    lon:
-      name: lon
-      in: query
-      description: Longitude of the desired location
-      required: true
-      schema:
-        type: number
-        format: float
-        minimum: -180
-        maximum: 180
-    mode:
-      name: mode
-      in: query
-      description: |
-        Response format.
-
-        Default is `json` if you don't use the `mode` parameter.
-      required: false
-      schema:
-        type: string
-        enum: [html, json, xml]
-    units:
-      name: units
-      in: query
-      description: |
-        Units of measurement:
-
-        * `standard`: Kelvin for temperature, meter/sec for wind speed and wind gust
-        * `metric`: Celsius for temperature, meter/sec for wind speed and wind gust
-        * `imperial`: Fahrenheit for temperature, miles/hour for wind speed and wind gust
-
-        Default is `standard` if you don't use the `units` parameter.
-      required: false
-      schema:
-        type: string
-        enum: [standard, metric, imperial]
-    lang:
-      name: lang
-      in: query
-      description: |
-        Output language for weather description (`weather.description`) and city name (`name`) fields in the API response.
-
-        Available options:
-
-        * `af`: Afrikaans
-        * `al`: Albanian
-        * `ar`: Arabic
-        * `az`: Azerbaijani
-        * `eu`: Basque
-        * `be`: Belarusian
-        * `bg`: Bulgarian
-        * `ca`: Catalan
-        * `zh_cn`: Chinese Simplified
-        * `zh_tw`: Chinese Traditional
-        * `hr`: Croatian
-        * `cs`: Czech
-        * `da`: Danish
-        * `nl`: Dutch
-        * `en`: English
-        * `fi`: Finnish
-        * `fr`: French
-        * `gl`: Galician
-        * `de`: German
-        * `el`: Greek
-        * `he`: Hebrew
-        * `hi`: Hindi
-        * `hu`: Hungarian
-        * `is`: Icelandic
-        * `id`: Indonesian
-        * `it`: Italian
-        * `ja`: Japanese
-        * `kr`: Korean
-        * `ku`: Kurmanji (Kurdish)
-        * `la`: Latvian
-        * `lt`: Lithuanian
-        * `mk`: Macedonian
-        * `no`: Norwegian
-        * `fa`: Persian (Farsi)
-        * `pl`: Polish
-        * `pt`: Portuguese
-        * `pt_br`: Português Brasil
-        * `ro`: Romanian
-        * `ru`: Russian
-        * `sr`: Serbian
-        * `sk`: Slovak
-        * `sl`: Slovenian
-        * `es`: Spanish
-        * `sv`: Swedish
-        * `se`: Swedish
-        * `th`: Thai
-        * `tr`: Turkish
-        * `uk`: Ukrainian
-        * `vi`: Vietnamese
-        * `zu`: Zulu
-
-        Default is English if you don't use the `lang` parameter.
-      required: false
-      schema:
-        type: string
-  examples:
-    InvalidParameters:
-      summary: Invalid input parameters
-      value:
-        cod: 400
-        message: "Nothing to geocode"
-    InvalidApiKey:
-      summary: Invalid API key
-      value:
-        cod: 401
-        message: "Invalid API key. Please see https://openweathermap.org/faq#error401 for more info."
   schemas:
     WeatherData:
       type: object
@@ -393,8 +267,134 @@ components:
         message:
           type: string
           description: Description of the error code
+  parameters:
+    lat:
+      name: lat
+      in: query
+      description: Latitude of the desired location
+      required: true
+      schema:
+        type: number
+        format: float
+        minimum: -90
+        maximum: 90
+    lon:
+      name: lon
+      in: query
+      description: Longitude of the desired location
+      required: true
+      schema:
+        type: number
+        format: float
+        minimum: -180
+        maximum: 180
+    mode:
+      name: mode
+      in: query
+      description: |
+        Response format.
+
+        Default is `json` if you don't use the `mode` parameter.
+      required: false
+      schema:
+        type: string
+        enum: [html, json, xml]
+    units:
+      name: units
+      in: query
+      description: |
+        Units of measurement:
+
+        * `standard`: Kelvin for temperature, meter/sec for wind speed and wind gust
+        * `metric`: Celsius for temperature, meter/sec for wind speed and wind gust
+        * `imperial`: Fahrenheit for temperature, miles/hour for wind speed and wind gust
+
+        Default is `standard` if you don't use the `units` parameter.
+      required: false
+      schema:
+        type: string
+        enum: [standard, metric, imperial]
+    lang:
+      name: lang
+      in: query
+      description: |
+        Output language for weather description (`weather.description`) and city name (`name`) fields in the API response.
+
+        Available options:
+
+        * `af`: Afrikaans
+        * `al`: Albanian
+        * `ar`: Arabic
+        * `az`: Azerbaijani
+        * `eu`: Basque
+        * `be`: Belarusian
+        * `bg`: Bulgarian
+        * `ca`: Catalan
+        * `zh_cn`: Chinese Simplified
+        * `zh_tw`: Chinese Traditional
+        * `hr`: Croatian
+        * `cs`: Czech
+        * `da`: Danish
+        * `nl`: Dutch
+        * `en`: English
+        * `fi`: Finnish
+        * `fr`: French
+        * `gl`: Galician
+        * `de`: German
+        * `el`: Greek
+        * `he`: Hebrew
+        * `hi`: Hindi
+        * `hu`: Hungarian
+        * `is`: Icelandic
+        * `id`: Indonesian
+        * `it`: Italian
+        * `ja`: Japanese
+        * `kr`: Korean
+        * `ku`: Kurmanji (Kurdish)
+        * `la`: Latvian
+        * `lt`: Lithuanian
+        * `mk`: Macedonian
+        * `no`: Norwegian
+        * `fa`: Persian (Farsi)
+        * `pl`: Polish
+        * `pt`: Portuguese
+        * `pt_br`: Português Brasil
+        * `ro`: Romanian
+        * `ru`: Russian
+        * `sr`: Serbian
+        * `sk`: Slovak
+        * `sl`: Slovenian
+        * `es`: Spanish
+        * `sv`: Swedish
+        * `se`: Swedish
+        * `th`: Thai
+        * `tr`: Turkish
+        * `uk`: Ukrainian
+        * `vi`: Vietnamese
+        * `zu`: Zulu
+
+        Default is English if you don't use the `lang` parameter.
+      required: false
+      schema:
+        type: string
+  examples:
+    InvalidParameters:
+      summary: Invalid input parameters
+      value:
+        cod: 400
+        message: "Nothing to geocode"
+    InvalidApiKey:
+      summary: Invalid API key
+      value:
+        cod: 401
+        message: "Invalid API key. Please see https://openweathermap.org/faq#error401 for more info."
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: query
+      name: appid
 security:
-  - apiKey: []
+  - ApiKey: []
 tags:
   - name: Weather
     description: Operations related to weather data
