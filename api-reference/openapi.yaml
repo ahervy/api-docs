@@ -86,11 +86,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
               examples:
-                invalidParameters:
-                  summary: Invalid input parameters
-                  value:
-                    cod: 400
-                    message: "Nothing to geocode"
+                InvalidParameters:
+                  $ref: "#/components/examples/InvalidParameters"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                InvalidParameters:
+                  $ref: "#/components/examples/InvalidParameters"
         "401":
           description: Unauthorized - Invalid API key
           content:
@@ -98,15 +101,21 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
               examples:
-                invalidApiKey:
-                  summary: Invalid API key
-                  value:
-                    cod: 401
-                    message: "Invalid API key. Please see https://openweathermap.org/faq#error401 for more info."
+                InvalidApiKey:
+                  $ref: "#/components/examples/InvalidApiKey"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                InvalidApiKey:
+                  $ref: "#/components/examples/InvalidApiKey"
         "429":
           description: Too Many Requests - Rate limit exceeded
           content:
             application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/xml:
               schema:
                 $ref: "#/components/schemas/Error"
 components:
@@ -225,6 +234,17 @@ components:
       required: false
       schema:
         type: string
+  examples:
+    InvalidParameters:
+      summary: Invalid input parameters
+      value:
+        cod: 400
+        message: "Nothing to geocode"
+    InvalidApiKey:
+      summary: Invalid API key
+      value:
+        cod: 401
+        message: "Invalid API key. Please see https://openweathermap.org/faq#error401 for more info."
   schemas:
     WeatherData:
       type: object
@@ -364,6 +384,8 @@ components:
           description: API response status code
     Error:
       type: object
+      xml:
+        name: ClientError
       properties:
         cod:
           type: integer
