@@ -233,7 +233,6 @@ components:
         cod:
           type: integer
           description: API response status code
-
     WeatherDataXml:
       type: object
       xml:
