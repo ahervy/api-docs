@@ -34,7 +34,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WeatherData"
+                $ref: "#/components/schemas/WeatherDataJson"
               examples:
                 ParisWeather:
                   summary: Weather Data for Paris, France
@@ -74,7 +74,7 @@ paths:
                     cod: 200
             application/xml:
               schema:
-                $ref: "#/components/schemas/WeatherData"
+                $ref: "#/components/schemas/WeatherDataXml"
             text/html:
               schema:
                 type: string
@@ -86,11 +86,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
               examples:
-                invalidParameters:
-                  summary: Invalid input parameters
-                  value:
-                    cod: 400
-                    message: "Nothing to geocode"
+                InvalidParameters:
+                  $ref: "#/components/examples/InvalidParameters"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                InvalidParameters:
+                  $ref: "#/components/examples/InvalidParameters"
         "401":
           description: Unauthorized - Invalid API key
           content:
@@ -98,23 +101,379 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
               examples:
-                invalidApiKey:
-                  summary: Invalid API key
-                  value:
-                    cod: 401
-                    message: "Invalid API key. Please see https://openweathermap.org/faq#error401 for more info."
+                InvalidApiKey:
+                  $ref: "#/components/examples/InvalidApiKey"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                InvalidApiKey:
+                  $ref: "#/components/examples/InvalidApiKey"
         "429":
           description: Too Many Requests - Rate limit exceeded
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
 components:
-  securitySchemes:
-    apiKey:
-      type: apiKey
-      in: query
-      name: appid
+  schemas:
+    WeatherDataJson:
+      type: object
+      properties:
+        coord:
+          $ref: "#/components/schemas/Coord"
+        weather:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: Weather condition identifier
+              main:
+                type: string
+                description: Group of weather parameters (Rain, Snow, Clouds etc.)
+              description:
+                type: string
+                description: Weather condition within the group
+              icon:
+                type: string
+                description: Weather icon identifier
+        base:
+          type: string
+          description: Internal parameter
+        main:
+          type: object
+          properties:
+            temp:
+              type: number
+              description: Temperature
+            feels_like:
+              type: number
+              description: Temperature accounting for human perception
+            pressure:
+              type: integer
+              description: Atmospheric pressure at sea level (hPa)
+            humidity:
+              type: integer
+              description: Humidity (%)
+            temp_min:
+              type: number
+              description: Minimum temperature at the moment (only for large megapolises and urban areas)
+            temp_max:
+              type: number
+              description: Maximum temperature at the moment (only for large megapolises and urban areas)
+            sea_level:
+              type: integer
+              description: Atmospheric pressure at sea level (hPa)
+            grnd_level:
+              type: integer
+              description: Atmospheric pressure at ground level (hPa)
+        visibility:
+          type: integer
+          description: Visibility (meters)
+        wind:
+          type: object
+          properties:
+            speed:
+              type: number
+              description: Wind speed
+            deg:
+              type: integer
+              description: Wind direction, degrees (meteorological)
+            gust:
+              type: number
+              description: Wind gust
+        clouds:
+          type: object
+          properties:
+            all:
+              type: integer
+              description: Cloudiness (in percentage)
+        rain:
+          $ref: "#/components/schemas/Precipitation"
+        snow:
+          $ref: "#/components/schemas/Precipitation"
+        dt:
+          type: integer
+          description: Time of data calculation, in Unix time (UTC)
+        sys:
+          type: object
+          properties:
+            type:
+              type: integer
+              description: Internal parameter
+            id:
+              type: integer
+              description: Internal parameter
+            message:
+              type: number
+              description: Internal parameter
+            country:
+              type: string
+              description: Country code. For example, `FR` for France.
+            sunrise:
+              type: integer
+              description: Sunrise time, in Unix time (UTC)
+            sunset:
+              type: integer
+              description: Sunset time, in Unix time (UTC)
+        timezone:
+          type: integer
+          description: Shift in seconds from UTC
+        id:
+          type: integer
+          description: City identifier
+        name:
+          type: string
+          description: City name
+        cod:
+          type: integer
+          description: API response status code
+    WeatherDataXml:
+      type: object
+      xml:
+        name: current
+      properties:
+        city:
+          type: object
+          xml:
+            name: city
+          properties:
+            id:
+              type: integer
+              description: City identifier
+              xml:
+                attribute: true
+            name:
+              type: string
+              description: City name
+              xml:
+                attribute: true
+            coord:
+              $ref: "#/components/schemas/Coord"
+            country:
+              type: string
+              description: Country code. For example, `FR` for France.
+            timezone:
+              type: integer
+              description: Shift in seconds from UTC
+            sun:
+              type: object
+              properties:
+                rise:
+                  type: string
+                  description: Sunrise time, in ISO 8601 format
+                  xml:
+                    attribute: true
+                set:
+                  type: string
+                  description: Sunset time, in ISO 8601 format
+                  xml:
+                    attribute: true
+        temperature:
+          type: object
+          properties:
+            value:
+              type: number
+              description: Temperature
+              xml:
+                attribute: true
+            min:
+              type: number
+              description: Minimum temperature at the moment (only for large megapolises and urban areas)
+              xml:
+                attribute: true
+            max:
+              type: number
+              description: Maximum temperature at the moment (only for large megapolises and urban areas)
+              xml:
+                attribute: true
+            unit:
+              type: string
+              description: Unit of measurement for temperature
+              xml:
+                attribute: true
+        feels_like:
+          type: object
+          properties:
+            value:
+              type: number
+              description: Temperature accounting for human perception
+              xml:
+                attribute: true
+            unit:
+              type: string
+              description: Unit of measurement for feels_like temperature
+              xml:
+                attribute: true
+        humidity:
+          type: object
+          properties:
+            value:
+              type: integer
+              description: Humidity (%)
+              xml:
+                attribute: true
+            unit:
+              type: string
+              description: Unit of measurement for humidity
+              xml:
+                attribute: true
+        pressure:
+          type: object
+          properties:
+            value:
+              type: integer
+              description: Atmospheric pressure at sea level (hPa)
+              xml:
+                attribute: true
+            unit:
+              type: string
+              description: Unit of measurement for pressure
+              xml:
+                attribute: true
+        wind:
+          type: object
+          properties:
+            speed:
+              type: object
+              properties:
+                value:
+                  type: number
+                  description: Wind speed
+                  xml:
+                    attribute: true
+                unit:
+                  type: string
+                  description: Unit of measurement for wind speed
+                  xml:
+                    attribute: true
+                name:
+                  type: string
+                  description: Wind speed name
+                  xml:
+                    attribute: true
+            gusts:
+              type: object
+              nullable: true
+              properties:
+                value:
+                  type: integer
+                  description: Wind gust
+                  xml:
+                    attribute: true
+            direction:
+              type: object
+              properties:
+                value:
+                  type: integer
+                  description: Wind direction, degrees (meteorological)
+                  xml:
+                    attribute: true
+                code:
+                  type: string
+                  description: Wind direction code
+                  xml:
+                    attribute: true
+                name:
+                  type: string
+                  description: Wind direction name
+                  xml:
+                    attribute: true
+        clouds:
+          type: object
+          properties:
+            value:
+              type: integer
+              description: Cloudiness (in percentage)
+              xml:
+                attribute: true
+            name:
+              type: string
+              description: Cloudiness name
+              xml:
+                attribute: true
+        visibility:
+          type: object
+          properties:
+            value:
+              type: integer
+              description: Visibility (meters)
+              xml:
+                attribute: true
+        precipitation:
+          type: object
+          properties:
+            mode:
+              type: string
+              enum: [no, rain, snow]
+              description: Precipitation mode
+              xml:
+                attribute: true
+        weather:
+          type: object
+          properties:
+            number:
+              type: integer
+              description: Weather condition identifier
+              xml:
+                attribute: true
+            value:
+              type: string
+              description: Weather condition within the group
+              xml:
+                attribute: true
+            icon:
+              type: string
+              description: Weather icon identifier
+              xml:
+                attribute: true
+        lastupdate:
+          type: object
+          properties:
+            value:
+              type: string
+              description: Time of data calculation, in ISO 8601 format
+              xml:
+                attribute: true
+    Coord:
+      type: object
+      properties:
+        lon:
+          type: number
+          description: Longitude of the location
+          xml:
+            attribute: true
+        lat:
+          type: number
+          description: Latitude of the location
+          xml:
+            attribute: true
+    Precipitation:
+      type: object
+      nullable: true
+      properties:
+        "1h":
+          type: number
+          description: Precipitation volume for the last 1 hour (mm)
+        "3h":
+          type: number
+          description: Precipitation volume for the last 3 hours (mm)
+    Error:
+      type: object
+      xml:
+        name: ClientError
+      properties:
+        cod:
+          type: integer
+          description: API response error code
+        message:
+          type: string
+          description: Description of the error code
   parameters:
     lat:
       name: lat
@@ -225,154 +584,24 @@ components:
       required: false
       schema:
         type: string
-  schemas:
-    WeatherData:
-      type: object
-      properties:
-        coord:
-          type: object
-          properties:
-            lon:
-              type: number
-              description: Longitude of the location
-            lat:
-              type: number
-              description: Latitude of the location
-        weather:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-                description: Weather condition identifier
-              main:
-                type: string
-                description: Group of weather parameters (Rain, Snow, Clouds etc.)
-              description:
-                type: string
-                description: Weather condition within the group
-              icon:
-                type: string
-                description: Weather icon identifier
-        base:
-          type: string
-          description: Internal parameter
-        main:
-          type: object
-          properties:
-            temp:
-              type: number
-              description: Temperature
-            feels_like:
-              type: number
-              description: Temperature accounting for human perception
-            pressure:
-              type: integer
-              description: Atmospheric pressure at sea level (hPa)
-            humidity:
-              type: integer
-              description: Humidity (%)
-            temp_min:
-              type: number
-              description: Minimum temperature at the moment (only for large megapolises and urban areas)
-            temp_max:
-              type: number
-              description: Maximum temperature at the moment (only for large megapolises and urban areas)
-            sea_level:
-              type: integer
-              description: Atmospheric pressure at sea level (hPa)
-            grnd_level:
-              type: integer
-              description: Atmospheric pressure at ground level (hPa)
-        visibility:
-          type: integer
-          description: Visibility (meters)
-        wind:
-          type: object
-          properties:
-            speed:
-              type: number
-              description: Wind speed
-            deg:
-              type: integer
-              description: Wind direction, degrees (meteorological)
-            gust:
-              type: number
-              description: Wind gust
-        clouds:
-          type: object
-          properties:
-            all:
-              type: integer
-              description: Cloudiness (in percentage)
-        rain:
-          type: object
-          nullable: true
-          properties:
-            1h:
-              type: number
-              description: Rain volume for the last 1 hour (mm)
-            3h:
-              type: number
-              description: Rain volume for the last 3 hours (mm)
-        snow:
-          type: object
-          nullable: true
-          properties:
-            1h:
-              type: number
-              description: Snow volume for the last 1 hour (mm)
-            3h:
-              type: number
-              description: Snow volume for the last 3 hours (mm)
-        dt:
-          type: integer
-          description: Time of data calculation, in Unix time (UTC)
-        sys:
-          type: object
-          properties:
-            type:
-              type: integer
-              description: Internal parameter
-            id:
-              type: integer
-              description: Internal parameter
-            message:
-              type: number
-              description: Internal parameter
-            country:
-              type: string
-              description: Country code. For example, `FR` for France.
-            sunrise:
-              type: integer
-              description: Sunrise time, in Unix time (UTC)
-            sunset:
-              type: integer
-              description: Sunset time, in Unix time (UTC)
-        timezone:
-          type: integer
-          description: Shift in seconds from UTC
-        id:
-          type: integer
-          description: City identifier
-        name:
-          type: string
-          description: City name
-        cod:
-          type: integer
-          description: API response status code
-    Error:
-      type: object
-      properties:
-        cod:
-          type: integer
-          description: API response error code
-        message:
-          type: string
-          description: Description of the error code
+  examples:
+    InvalidParameters:
+      summary: Invalid input parameters
+      value:
+        cod: 400
+        message: "Nothing to geocode"
+    InvalidApiKey:
+      summary: Invalid API key
+      value:
+        cod: 401
+        message: "Invalid API key. Please see https://openweathermap.org/faq#error401 for more info."
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: query
+      name: appid
 security:
-  - apiKey: []
+  - ApiKey: []
 tags:
   - name: Weather
     description: Operations related to weather data
