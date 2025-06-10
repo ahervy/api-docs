@@ -3,5 +3,6 @@ title: 'Rate limits'
 description: 'Limits are placed on the number of requests that can be made'
 ---
 
-All endpoints for the Current Weather Data API have a limit of 60 requests per minute.
-If you exceed the limit, a `429` (Too many requests) error is returned.
+All endpoints for the Current Weather Data API are limited to 60 requests per minute.  
+If you exceed this limit, the API returns a `429` (Too Many Requests) error.  
+If you receive this error, wait a minute before making a request.
