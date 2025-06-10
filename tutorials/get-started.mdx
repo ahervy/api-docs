@@ -4,7 +4,7 @@ description: 'Learn how to call the Current Weather Data API.'
 ---
 
 The Current Weather Data API provides access to weather data for any location worldwide.
-In this tutorial, you will make your first call to the the Current Weather Data API.
+In this tutorial, you will make your first call to the Current Weather Data API.
 
 <Steps titleSize="h2">
   <Step title="Create an account">
@@ -90,31 +90,28 @@ In this tutorial, you will make your first call to the the Current Weather Data 
             "cod": 200
         }
         ```
-  Let's have a look at the reponse:
-      * The `coord` object includes the longitude (`lon`) and latitude (`lat`) of the location.
-
-      * The `weather` object includes the weather parameters for the location:
-    
-        * `id` is the weather condition identifier. For a full list of weather conditions identifiers, see .
-        * `main` corresponds to the group of weather parameters (`weather.main`).
-        * `description` is the weather condition.
-        * `icon` is the related weather icon . For a full list of weather icons, see .
-    
-      * The main object includes temperature and pressure info:
-    
-        * `temp` is the current Kelvin temperature.
-        * `feels_like` is the perceived temperature.
-        * `temp_min` and `temp_max` are the minimum and maximum temperatures at the moment, respectively.
-        Both temperatures are only available for large megalopolises and urban areas.
+  Let's look at the response:
+    * The `coord` object includes the longitude (`lon`) and latitude (`lat`) of the location.
+    * The `weather` array includes:
+      * `id`: Weather condition identifier. For more information, see the <a href="/essential/weather-conditions#weather-condition-codes">Weather condition codes</a>.
+      * `main`: Group of weather parameters.
+      * `description`: Weather condition description.
+      * `icon`: Related weather icon. For more information, see <a href="/essential/weather-conditions">Weather conditions and icons</a>.
+    * The `main` object includes:
+      * `temp`: Current temperature in Kelvin.
+      * `feels_like`: Perceived temperature.
+      * `temp_min` and `temp_max`: Minimum and maximum temperatures at the moment. These are only available for large megalopolises and urban areas.
       At the time of the API call, `289.28` is the Kelvin temperature (`main.temp`).
-    
-      * The `wind` object includes wind speed (`speed`) in meters/second and wind direction (`deg`) in degrees.
+    * The `wind` object includes:
+      * `speed`: Wind speed in meters/second.
+      * `deg`: Wind direction in degrees.
+    * The `clouds` object shows the cloudiness percentage (`all`).
+    * The `sys` object includes:
+      * `country`: The location's country code.
+      * `sunrise`: Sunrise time in Unix time (seconds since Jan 1, 1970, UTC).
+      * `sunset`: Sunset time in Unix time (seconds since Jan 1, 1970, UTC).
 
-      * The `clouds` object shows the cloudiness percentage (`all`).
-
-      * The `sys` object includes info about the location's country (`country`) as well as sunrise (`sunrise`) and sunset (`sunset`) times in Unix time (UTC).
-
-    For a detailed description of the API response, see <a href="/api-reference">the API reference documentation</a>.
+For a detailed description of the API response, see the <a href="/api-reference">API reference documentation</a>.
   </Step>
   <Step title="Next steps">
     You've successfully made your first call to the Current Weather Data API. You can now explore more features offered by the API, such as:
