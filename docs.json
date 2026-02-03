@@ -1,0 +1,65 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Arnaud Hervy",
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0D9373"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Welcome",
+        "pages": [
+          "introduction"
+        ]
+      },
+      {
+        "group": "Get Started",
+        "pages": [
+          "tutorials/get-started"
+        ]
+      },
+      {
+        "group": "Essentials",
+        "pages": [
+          "essentials/overview",
+          "essentials/authentication",
+          "essentials/rate-limits",
+          "essentials/weather-conditions"
+        ]
+      },
+      {
+        "group": "API Reference",
+        "pages": [
+          "api-reference/current-weather-data"
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "api": {
+    "openapi": [
+      "api-reference/openapi.yaml"
+    ]
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "arnaudhervy.com",
+        "href": "https://arnaudhervy.com"
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/ahervy",
+      "linkedin": "https://www.linkedin.com/in/arnaudhervy/"
+    }
+  }
+}
