@@ -10,7 +10,7 @@ In this tutorial, you will make your first call to the Current Weather Data API.
   <Step title="Create an account">
   To get started with the Current Weather Data API, you need to create a personal account.
 
-    1. Go to https://home.openweathermap.org/users/sign_up.
+    1. Go to [https://home.openweathermap.org/users/sign_up](https://home.openweathermap.org/users/sign_up).
     2. Fill in the form with the required info.
     3. Click **Create account**.
     4. In the confirmation email, click **Verify your email**.\
@@ -45,7 +45,7 @@ In this tutorial, you will make your first call to the Current Weather Data API.
         The `appid` parameter is where you need to provide your API key.
   
   The JSON response should look something like this:
-        ```JSON
+        ```json
         {
             "coord": {
                 "lon": 2.3488,
@@ -93,10 +93,10 @@ In this tutorial, you will make your first call to the Current Weather Data API.
   Let's look at the response:
     * The `coord` object includes the longitude (`lon`) and latitude (`lat`) of the location.
     * The `weather` array includes:
-      * `id`: Weather condition identifier. For more information, see the <a href="/essential/weather-conditions#weather-condition-codes">Weather condition codes</a>.
+      * `id`: Weather condition identifier. For more information, see the <a href="/essentials/weather-conditions#weather-condition-codes">Weather condition codes</a>.
       * `main`: Group of weather parameters.
       * `description`: Weather condition description.
-      * `icon`: Related weather icon. For more information, see <a href="/essential/weather-conditions">Weather conditions and icons</a>.
+      * `icon`: Related weather icon. For more information, see <a href="/essentials/weather-conditions">Weather conditions and icons</a>.
     * The `main` object includes:
       * `temp`: Current temperature in Kelvin.
       * `feels_like`: Perceived temperature.
