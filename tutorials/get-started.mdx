@@ -43,6 +43,8 @@ In this tutorial, you will make your first call to the Current Weather Data API.
         The URL `https://api.openweathermap.org/data/2.5/weather` is the endpoint for the Current Weather Data API.\
         The `lat` and `lon` parameters specify the geographic coordinates for the location you want to retrieve weather data for. In this example, we're using the coordinates for Paris, France.\
         The `appid` parameter is where you need to provide your API key.
+
+        OpenWeather recommends using the Geocoding API to convert city names or ZIP codes into coordinates, and notes that the built-in geocoder is deprecated.
   
   The JSON response should look something like this:
         ```json
@@ -91,7 +93,7 @@ In this tutorial, you will make your first call to the Current Weather Data API.
         }
         ```
   Let's look at the response:
-    * The `coord` object includes the longitude (`lon`) and latitude (`lat`) of the location.
+    * The `coord` object includes the longitude (`lon`) and latitude (`lat`) of the location. The returned coordinates may reflect the nearest weather station rather than the exact input.
     * The `weather` array includes:
       * `id`: Weather condition identifier. For more information, see the <a href="/essentials/weather-conditions#weather-condition-codes">Weather condition codes</a>.
       * `main`: Group of weather parameters.
@@ -100,12 +102,14 @@ In this tutorial, you will make your first call to the Current Weather Data API.
     * The `main` object includes:
       * `temp`: Current temperature in Kelvin.
       * `feels_like`: Perceived temperature.
-      * `temp_min` and `temp_max`: Minimum and maximum temperatures at the moment. These are only available for large megalopolises and urban areas.
+      * `temp_min` and `temp_max`: Optional min and max temperatures observed at the current moment within a large city or urban area. These can differ from `temp` due to variations across the area.
       At the time of the API call, `289.28` is the Kelvin temperature (`main.temp`).
     * The `wind` object includes:
       * `speed`: Wind speed in meters/second.
       * `deg`: Wind direction in degrees.
+      * `gust`: Wind gust (optional and only present when available).
     * The `clouds` object shows the cloudiness percentage (`all`).
+    * `rain` and `snow` objects are optional and only present when there is precipitation.
     * The `sys` object includes:
       * `country`: The location's country code.
       * `sunrise`: Sunrise time in Unix time (seconds since Jan 1, 1970, UTC).
