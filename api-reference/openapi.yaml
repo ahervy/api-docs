@@ -23,6 +23,7 @@ paths:
         Retrieve the current weather conditions for a specified location
         using latitude and longitude coordinates.
       parameters:
+        - $ref: "#/components/parameters/appid"
         - $ref: "#/components/parameters/lat"
         - $ref: "#/components/parameters/lon"
         - $ref: "#/components/parameters/mode"
@@ -78,7 +79,7 @@ paths:
             text/html:
               schema:
                 type: string
-                description: "HTML representation of the weather data, with values formatted for display."
+                description: "HTML representation of the weather data, with values formatted for display. This output is a preformatted widget snippet and may include HTTP asset links."
         "400":
           description: Bad Request - Invalid request parameters
           content:
@@ -358,8 +359,11 @@ components:
                   xml:
                     attribute: true
             gusts:
-              type: object
-              nullable: true
+              type:
+                - object
+                - "null"
+              description: |
+                Wind gust data. This element may be empty or omitted when gust data is unavailable.
               properties:
                 value:
                   type: integer
@@ -454,8 +458,9 @@ components:
           xml:
             attribute: true
     Precipitation:
-      type: object
-      nullable: true
+      type:
+        - object
+        - "null"
       properties:
         "1h":
           type: number
@@ -475,6 +480,13 @@ components:
           type: string
           description: Description of the error code
   parameters:
+    appid:
+      name: appid
+      in: query
+      description: API key for authentication
+      required: true
+      schema:
+        type: string
     lat:
       name: lat
       in: query
@@ -529,8 +541,8 @@ components:
 
         Available options:
 
+        * `sq`: Albanian
         * `af`: Afrikaans
-        * `al`: Albanian
         * `ar`: Arabic
         * `az`: Azerbaijani
         * `eu`: Basque
@@ -540,7 +552,7 @@ components:
         * `zh_cn`: Chinese Simplified
         * `zh_tw`: Chinese Traditional
         * `hr`: Croatian
-        * `cs`: Czech
+        * `cz`: Czech
         * `da`: Danish
         * `nl`: Dutch
         * `en`: English
@@ -571,12 +583,11 @@ components:
         * `sr`: Serbian
         * `sk`: Slovak
         * `sl`: Slovenian
-        * `es`: Spanish
-        * `sv`: Swedish
-        * `se`: Swedish
+        * `sp`, `es`: Spanish
+        * `sv`, `se`: Swedish
         * `th`: Thai
         * `tr`: Turkish
-        * `uk`: Ukrainian
+        * `ua`, `uk`: Ukrainian
         * `vi`: Vietnamese
         * `zu`: Zulu
 
