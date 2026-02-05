@@ -79,7 +79,7 @@ paths:
             text/html:
               schema:
                 type: string
-                description: "HTML representation of the weather data, with values formatted for display."
+                description: "HTML representation of the weather data, with values formatted for display. This output is a preformatted widget snippet and may include HTTP asset links."
         "400":
           description: Bad Request - Invalid request parameters
           content:
@@ -362,6 +362,8 @@ components:
               type:
                 - object
                 - "null"
+              description: |
+                Wind gust data. This element may be empty or omitted when gust data is unavailable.
               properties:
                 value:
                   type: integer
