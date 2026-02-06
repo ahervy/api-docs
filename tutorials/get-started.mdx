@@ -115,6 +115,12 @@ In this tutorial, you will make your first call to the Current Weather Data API.
       * `sunrise`: Sunrise time in Unix time (seconds since Jan 1, 1970, UTC).
       * `sunset`: Sunset time in Unix time (seconds since Jan 1, 1970, UTC).
 
+  ### Troubleshooting
+
+  * **401 Unauthorized**: Your API key is missing or invalid. Make sure the `appid` value matches an active key.
+  * **400 Bad Request**: You’re missing required query parameters (for example, `lat` or `lon`).
+  * **429 Too Many Requests**: You’ve exceeded the rate limit. Wait at least a minute before retrying.
+
 For a detailed description of the API response, see the <a href="/api-reference">API reference documentation</a>.
   </Step>
   <Step title="Next steps">
