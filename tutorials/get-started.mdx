@@ -1,136 +1,129 @@
 ---
 title: Make your first API call
-description: Learn how to call the Current Weather Data API.
+description: Request current weather by coordinates and inspect the JSON response.
 ---
 
-The Current Weather Data API provides access to weather data for any location worldwide.
-In this tutorial, you will make your first call to the Current Weather Data API.
+In this guide, you'll make your first successful request to the Current Weather API and learn how to handle the response
+and common errors.
+
+Before you start, you need:
+
+- An active OpenWeather account. If you don't have an OpenWeather account, create one at
+  https://home.openweathermap.org/users/sign_up.
+- An active API key
+- A terminal with curl
+- Latitude and longitude for the location you want to query
+
+<Info>
+OpenWeather recommends using coordinates for weather requests. Convert city names, ZIP codes, or addresses with the
+Geocoding API before calling this endpoint.
+</Info>
 
 <Steps titleSize="h2">
-  <Step title="Create an account">
-  To get started with the Current Weather Data API, you need to create a personal account.
-
-    1. Go to [https://home.openweathermap.org/users/sign_up](https://home.openweathermap.org/users/sign_up).
-    2. Fill in the form with the required info.
-    3. Click **Create account**.
-    4. In the confirmation email, click **Verify your email**.
-
-    Without a verified email address, you won't be able to use the Current Weather Data API.
-
-    Once your email address has been successfully confirmed, you can [sign in to your account](https://openweathermap.org/home/sign_in).
-  </Step>
   <Step title="Get an API key">
-  When your account is created, an API key is generated. You need this API key to call the Current Weather Data API.
+    OpenWeather generates an API key when you create an account.
 
     1. [Sign in to your account](https://openweathermap.org/home/sign_in).
     2. In the top menu, click your name > **My API keys**.
 
     Your API key is listed under the **Key** column.
 
-    <Info>Make sure the status of your API key is **Active**. If the status is **Inactive**, click the toggle icon to activate your API key.</Info>
+    <Info>Make sure the status of your API key is **Active**. If the status is **Inactive**, click the toggle icon to
+    activate your API key.</Info>
   </Step>
+
   <Step title="Make your first call">
-  Now that you have your API key, you are ready to make your first call to the Current Weather Data API.
+    Store your API key in an environment variable so you don't paste secrets into shell history or source files.
 
-  The following example shows how to get the current weather in Paris, France, using curl in a terminal.
+    <CodeGroup>
 
-    1. Open your terminal.
-    2. Copy and paste the following code snippet.
+    ```bash
+    export OPENWEATHER_API_KEY="YOUR_API_KEY"
+    curl --request GET \
+      --url "https://api.openweathermap.org/data/2.5/weather?lat=48.8534&lon=2.3488&units=metric&appid=$OPENWEATHER_API_KEY"
+    ```
 
-       Replace `<API_KEY>` with your API key from Step 2.
-        ```bash
-        curl --request GET \
-          --url 'https://api.openweathermap.org/data/2.5/weather?lat=48.8534&lon=2.3488&appid=<API_KEY>'
-        ```
-        The URL `https://api.openweathermap.org/data/2.5/weather` is the endpoint for the Current Weather Data API.
+    </CodeGroup>
 
-        The `lat` and `lon` parameters specify the geographic coordinates for the location you want to retrieve weather data for. In this example, we're using the coordinates for Paris, France.
+    This request uses:
 
-        The `appid` parameter is where you need to provide your API key.
-
-        OpenWeather recommends using the Geocoding API to convert city names or ZIP codes into coordinates, and notes that the built-in geocoder is deprecated.
-
-  The JSON response should look something like this:
-        ```json
-        {
-            "coord": {
-                "lon": 2.3488,
-                "lat": 48.8534
-            },
-            "weather": [
-                {
-                    "id": 803,
-                    "main": "Clouds",
-                    "description": "broken clouds",
-                    "icon": "04d"
-                }
-            ],
-            "base": "stations",
-            "main": {
-                "temp": 289.28,
-                "feels_like": 288.7,
-                "temp_min": 288.21,
-                "temp_max": 291.69,
-                "pressure": 1022,
-                "humidity": 67
-            },
-            "visibility": 10000,
-            "wind": {
-                "speed": 2.57,
-                "deg": 40
-            },
-            "clouds": {
-                "all": 75
-            },
-            "dt": 1717406455,
-            "sys": {
-                "type": 2,
-                "id": 2041230,
-                "country": "FR",
-                "sunrise": 1717386622,
-                "sunset": 1717444055
-            },
-            "timezone": 7200,
-            "id": 2988507,
-            "name": "Paris",
-            "cod": 200
-        }
-        ```
-  Let's look at the response:
-    * The `coord` object includes the longitude (`lon`) and latitude (`lat`) of the location. The returned coordinates may reflect the nearest weather station rather than the exact input.
-    * The `weather` array includes:
-      * `id`: Weather condition identifier. For more information, see the <a href="/essentials/weather-conditions#weather-condition-codes">Weather condition codes</a>.
-      * `main`: Group of weather parameters.
-      * `description`: Weather condition description.
-      * `icon`: Related weather icon. For more information, see <a href="/essentials/weather-conditions">Weather conditions and icons</a>.
-    * The `main` object includes:
-      * `temp`: Current temperature in Kelvin.
-      * `feels_like`: Perceived temperature.
-      * `temp_min` and `temp_max`: Optional min and max temperatures observed at the current moment within a large city or urban area. These can differ from `temp` due to variations across the area.
-      At the time of the API call, `289.28` is the Kelvin temperature (`main.temp`).
-    * The `wind` object includes:
-      * `speed`: Wind speed in meters per second.
-      * `deg`: Wind direction in degrees.
-      * `gust`: Wind gust (optional and only present when available).
-    * The `clouds` object shows the cloudiness percentage (`all`).
-    * `rain` and `snow` objects are optional and only present when there is precipitation.
-    * The `sys` object includes:
-      * `country`: The location's country code.
-      * `sunrise`: Sunrise time in Unix time (seconds since Jan 1, 1970, UTC).
-      * `sunset`: Sunset time in Unix time (seconds since Jan 1, 1970, UTC).
-
-  ### Troubleshooting
-
-  * **401 Unauthorized**: Your API key is missing or invalid. Make sure the `appid` value matches an active key.
-  * **400 Bad Request**: You’re missing required query parameters (for example, `lat` or `lon`).
-  * **429 Too Many Requests**: You’ve exceeded the rate limit. Wait at least a minute before retrying.
-
-For a detailed description of the API response, see the <a href="/api-reference/current-weather-data">API reference documentation</a>.
+    - `lat` and `lon` to identify Paris by coordinates
+    - `units=metric` so temperatures are returned in Celsius
+    - `appid` to authenticate the request with your API key
   </Step>
-  <Step title="Next steps">
-    You've successfully made your first call to the Current Weather Data API. You can now explore more features offered by the API, such as:
 
-    - Getting data in HTML and XML formats
-    - Getting data in imperial and metric units of measurement
+  <Step title="Inspect the JSON response">
+    If the request succeeds, the API returns a `200` status and a JSON object like this:
+
+    ```json
+    {
+      "coord": {
+        "lon": 2.3488,
+        "lat": 48.8534
+      },
+      "weather": [
+        {
+          "id": 803,
+          "main": "Clouds",
+          "description": "broken clouds",
+          "icon": "04d"
+        }
+      ],
+      "main": {
+        "temp": 16.13,
+        "feels_like": 15.55,
+        "temp_min": 15.06,
+        "temp_max": 18.54,
+        "pressure": 1022,
+        "humidity": 67
+      },
+      "visibility": 10000,
+      "wind": {
+        "speed": 2.57,
+        "deg": 40
+      },
+      "clouds": {
+        "all": 75
+      },
+      "dt": 1717406455,
+      "sys": {
+        "country": "FR",
+        "sunrise": 1717386622,
+        "sunset": 1717444055
+      },
+      "timezone": 7200,
+      "name": "Paris",
+      "cod": 200
+    }
+    ```
+
+    Key fields to handle in your application:
+
+    - `main.temp` and `main.feels_like` use the unit system requested with `units`. 
+      In this tutorial, they are Celsius because the request uses `units=metric`.
+    - `weather[0].id` is the stable weather condition code.
+      Use it for application logic, and use `weather[0].description` for display text.
+    - `weather[0].icon` maps to OpenWeather's icon assets. For more info, see [Weather conditions and icons](/essentials/weather-conditions).
+    - `rain`, `snow`, and `wind.gust` are optional. Check whether they exist before reading nested values.
+    - `dt`, `sys.sunrise`, and `sys.sunset` are Unix timestamps in UTC.
+    - `timezone` is the location's shift from UTC in seconds. Use it when rendering local times.
+  </Step>
+
+  <Step title="Troubleshoot request errors">
+    If your request fails, check the response status and error message.
+
+    | Status | Likely cause | Fix |
+    | --- | --- | --- |
+    | `400 Bad Request` | A required query parameter is missing or invalid. | Confirm that `lat` is between `-90` and `90`, `lon` is between `-180` and `180`, and both parameters are present. |
+    | `401 Unauthorized` | The API key is missing, inactive, or invalid. | Confirm that `appid` uses an active key from **My API keys**. |
+    | `429 Too Many Requests` | The API key exceeded its rate limit. | Wait at least one minute before retrying, or reduce request frequency in your app. |
+  </Step>
+
+  <Step title="Next steps">
+    You can now:
+
+    - Review the full [API reference](/api-reference/current-weather-data)
+    - Try `units=imperial` or remove `units` to compare default Kelvin values
+    - Request `mode=xml` or `mode=html` if your integration needs another response format
   </Step>
 </Steps>
