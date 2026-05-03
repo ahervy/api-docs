@@ -3,9 +3,15 @@ title: Weather conditions and icons
 description: Learn about the different weather conditions and icons available in the Current Weather Data API, and how to use them in your applications.
 ---
 
-The Current Weather Data API provides detailed weather data, including weather conditions and corresponding icons, for any location worldwide.
+The Current Weather Data API returns weather conditions as part of the `weather` array in the response.
 
-Understanding these weather conditions and icons helps you build apps that display accurate and visually appealing weather data.
+Each entry includes:
+- a numeric condition code (`id`)
+- a short group label (`main`)
+- a human-readable description (`description`)
+- an icon code (`icon`)
+
+Use the `id` field for application logic, and the `description` field for display.
 
 Example response:
 
@@ -22,12 +28,13 @@ Example response:
 }
 ```
 
+The `weather` array may contain multiple entries, but most applications use the first item (`weather[0]`).
+
 ## Weather icons
 
-The Current Weather Data API provides weather icons that represent different weather conditions.
-These icons can be displayed in your apps to provide users with a visual representation of the current weather.
+Weather icons provide a visual representation of the current conditions.
 
-To retrieve the URL for a specific weather icon, use the following format:
+To display an icon, construct the URL using the `icon` value returned by the API:
 
 `https://openweathermap.org/img/wn/<ICON_CODE>@2x.png`
 
@@ -54,6 +61,10 @@ The following sections include the icon list and commonly used weather condition
 
 The Current Weather Data API uses numerical codes to represent different weather conditions.
 These codes are grouped by type of weather condition.
+
+Use these codes to drive application logic (for example, grouping conditions or triggering UI changes).
+
+Avoid relying on the `description` field for logic, as it is intended for display and may vary.
 
 #### Group 2xx: Thunderstorm
 
