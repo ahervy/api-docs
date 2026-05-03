@@ -1,9 +1,56 @@
 ---
 title: Rate limits
-description: Learn how rate limits apply to Current Weather Data API requests.
+description: Understand how rate limits work and how to handle them.
 ---
 
-All endpoints for the Current Weather Data API are limited to 60 requests per minute.
-On the Free plan, you can make up to 1,000,000 calls per month.
-If you exceed these limits, the API returns a `429` (Too Many Requests) error.
-If you receive this error, wait a minute before making a request.
+All requests to the Current Weather Data API are subject to rate limits.
+
+## Limits
+
+On the Free plan:
+
+- **60 requests per minute**
+- **1,000,000 requests per month**
+
+If you exceed these limits, the API returns a `429 Too Many Requests` response.
+
+## How to handle rate limits
+
+When you receive a `429` response:
+
+- Stop sending requests temporarily
+- Wait at least one minute before retrying
+
+Avoid sending bursts of requests in a short time window.
+
+## Best practices
+
+- Cache responses when possible
+- Avoid making duplicate requests for the same data
+- Add retry logic with a delay when receiving `429` errors
+
+Example retry strategy (JavaScript):
+
+```javascript
+async function fetchWithRetry(url, options = {}, retries = 3) {
+  const response = await fetch(url, options);
+
+  // If rate limited (429) and retries remain, wait and retry
+  if (response.status === 429 && retries > 0) {
+    const delay = 60000; // wait 60 seconds before retrying
+    await new Promise(resolve => setTimeout(resolve, delay));
+
+    return fetchWithRetry(url, options, retries - 1);
+  }
+
+  // If the request failed for another reason, throw an error
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+
+  // Otherwise, return the successful response
+  return response;
+}
+```
+
+Handling rate limits correctly helps prevent unnecessary failures and improves reliability.
