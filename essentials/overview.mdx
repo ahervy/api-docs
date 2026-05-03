@@ -1,25 +1,50 @@
 ---
 title: About the Current Weather Data API
 sidebarTitle: Overview
-description: Learn about the Current Weather Data API.
+description: Understand how the Current Weather Data API works and what it returns.
 ---
 
 ## Overview
 
-The Current Weather Data API is a RESTful service that provides access to weather data for any location worldwide. OpenWeather's robust data collection system integrates information from multiple authoritative sources, including:
+The Current Weather Data API lets you retrieve real-time weather data for a specific location.
 
-- Global and local weather models
-- Satellites
-- Radars
-- A large network of weather stations
+You can use it to:
+- Get temperature, humidity, pressure, and wind data
+- Retrieve current weather conditions (for example, rain or clear sky)
+- Access optional data such as precipitation or wind gusts when available
 
-The API returns detailed weather observations, including temperature, precipitation, wind speed and direction, humidity, and atmospheric pressure.
-Response data is available in JSON, XML, or HTML formats.
+The API aggregates data from multiple sources, including weather models, satellites, radars, and weather stations.
+
+Responses are returned in JSON by default.
 
 ## Base URL
 
-All URLs referenced in the documentation have the following base:
+All endpoints use the following base URL:
 
 ```text
 https://api.openweathermap.org/data/2.5
 ```
+
+## Request basics
+
+A typical request requires:
+- A location (`lat` and `lon` are recommended)
+- Your API key (`appid`)
+- Optional parameters such as `units`
+
+Example:
+
+```bash
+curl "https://api.openweathermap.org/data/2.5/weather?lat=48.85&lon=2.35&units=metric&appid=YOUR_API_KEY"
+```
+
+By default, temperature is returned in Kelvin. Use `units=metric` or `units=imperial` to control the output.
+
+## Response behavior
+
+The response structure is mostly stable, but some fields are optional:
+
+- `rain` and `snow` only appear when relevant
+- `wind.gust` is not always present
+
+Always handle missing fields in your integration.
