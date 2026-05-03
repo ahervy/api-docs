@@ -163,10 +163,10 @@ components:
               description: Humidity (%)
             temp_min:
               type: number
-              description: Minimum temperature at the moment (only for large megapolises and urban areas)
+              description: Minimum temperature at the moment (only for large cities and urban areas)
             temp_max:
               type: number
-              description: Maximum temperature at the moment (only for large megapolises and urban areas)
+              description: Maximum temperature at the moment (only for large cities and urban areas)
             sea_level:
               type: integer
               description: Atmospheric pressure at sea level (hPa)
@@ -285,12 +285,12 @@ components:
                 attribute: true
             min:
               type: number
-              description: Minimum temperature at the moment (only for large megapolises and urban areas)
+              description: Minimum temperature at the moment (only for large cities and urban areas)
               xml:
                 attribute: true
             max:
               type: number
-              description: Maximum temperature at the moment (only for large megapolises and urban areas)
+              description: Maximum temperature at the moment (only for large cities and urban areas)
               xml:
                 attribute: true
             unit:
@@ -414,7 +414,7 @@ components:
           properties:
             mode:
               type: string
-              enum: [no, rain, snow]
+              enum: ["no", rain, snow]
               description: Precipitation mode
               xml:
                 attribute: true
@@ -524,9 +524,9 @@ components:
       description: |
         Units of measurement:
 
-        * `standard`: Kelvin for temperature, meter/sec for wind speed and wind gust
-        * `metric`: Celsius for temperature, meter/sec for wind speed and wind gust
-        * `imperial`: Fahrenheit for temperature, miles/hour for wind speed and wind gust
+        * `standard`: Kelvin for temperature, meters per second for wind speed and wind gust
+        * `metric`: Celsius for temperature, meters per second for wind speed and wind gust
+        * `imperial`: Fahrenheit for temperature, miles per hour for wind speed and wind gust
 
         Default is `standard` if you don't use the `units` parameter.
       required: false
