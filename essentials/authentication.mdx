@@ -1,18 +1,47 @@
 ---
 title: Authentication
-description: Learn how to authenticate requests with an API key.
+description: Authenticate requests using an API key.
 ---
 
-All endpoints for the Current Weather Data API are authenticated using an API key.
-You can view and manage API keys in your dashboard.
+All requests to the Current Weather Data API require an API key.
 
 ## Get an API key
 
-You can get your API key from your dashboard.
+If you don’t have an API key yet:
 
 1. [Sign in to your account](https://openweathermap.org/home/sign_in).
 2. In the top menu, click your name > **My API keys**.
 
-Your API key is listed under the **Key** column.
+Make sure your API key is **Active**.
 
-<Info>Make sure the status of your API key is **Active**. If the status is **Inactive**, click the toggle icon to activate your API key.</Info>
+## Use your API key
+
+Include your API key in every request using the `appid` parameter.
+
+Example:
+
+```bash
+curl "https://api.openweathermap.org/data/2.5/weather?lat=48.85&lon=2.35&units=metric&appid=YOUR_API_KEY"
+```
+
+Replace `YOUR_API_KEY` with your actual API key.
+
+## Security best practices
+
+- Do not hardcode your API key in client-side code
+- Store it in an environment variable
+- Never commit your API key to version control
+
+Example using an environment variable:
+
+```bash
+export OPENWEATHER_API_KEY=your_api_key_here
+
+curl "https://api.openweathermap.org/data/2.5/weather?lat=48.85&lon=2.35&units=metric&appid=$OPENWEATHER_API_KEY"
+```
+
+## Common issues
+
+| Error | Cause | Solution |
+|------|------|---------|
+| `401 Unauthorized` | Missing, invalid, or inactive API key | Check your `appid` value, activation status, and request format |
