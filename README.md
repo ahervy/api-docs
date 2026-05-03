@@ -1,11 +1,33 @@
 # API Documentation Portfolio
 
-This repository contains the [API documentation samples](https://arnaud.mintlify.app/introduction) for my [technical writing portfolio](https://arnaudhervy.com/).
-## About
+This repository contains a documentation prototype built with Mintlify, based on OpenWeather's Current Weather Data API.
 
-This repository provides some documentation for OpenWeather's Current Weather Data API. The documentation includes a getting started guide, an OpenAPI description, and reference documentation to help developers understand and use the API effectively.
+🔗 Live documentation: <https://arnaud.mintlify.app/introduction>  
+🔗 Portfolio case study: <https://arnaudhervy.com/portfolio/api-docs/>
 
-## Technologies Used
+## Overview
 
-- **Mintlify**: For generating and managing documentation
-- **MDX**: For writing content with Markdown and JSX
+This project demonstrates how raw API documentation can be transformed into a clear, task-oriented developer experience.
+
+It focuses on:
+
+- API onboarding (first successful request)
+- Documentation structure and navigation
+- Response handling and edge cases
+- Practical developer workflows
+
+## Contents
+
+- Getting started guide (first API call)
+- Guides (authentication, rate limits, response behavior)
+- API reference (OpenAPI-based)
+
+## Tech stack
+
+- **Mintlify**: documentation framework
+- **MDX**: content authoring
+- **OpenAPI**: API schema and reference generation
+
+## Purpose
+
+This is a portfolio project showcasing how to design developer-friendly API documentation, with an emphasis on clarity, usability, and real-world integration concerns.
