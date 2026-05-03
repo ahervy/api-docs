@@ -1,25 +1,20 @@
 ---
-title: Introduction
-description: Welcome to Arnaud Hervy's API documentation portfolio.
+title: Current Weather Data API
+description: Retrieve current weather data for a location using OpenWeather
 ---
 
-Hello, I'm Arnaud Hervy, a technical writer specializing in developer documentation.
+Use the OpenWeather Current Weather API to retrieve weather data for a specific location.
 
-This portfolio showcases samples of my work, using the [Current Weather Data API](https://docs.openweather.co.uk/current) from OpenWeather to provide weather data for any location worldwide.
+This documentation helps you understand the request format, authentication requirements, units, and response behavior
+before making your first call.
 
-Explore the following sections to see how I organize, explain, and present API information.
+## Example request
 
-<CardGroup cols={2}>
-  <Card title="Current Weather Data API overview" href="essentials/overview">
-    Learn more about the Current Weather Data API
-  </Card>
-  <Card title="Get Started" href="tutorials/get-started">
-    Make your first API call in a few minutes
-  </Card>
-  <Card title="API Reference" href="api-reference/current-weather-data">
-    View the reference documentation for the Current Weather Data API
-  </Card>
-  <Card title="OpenAPI description file" href="https://github.com/ahervy/api-docs/blob/main/api-reference/openapi.yaml">
-    View the OpenAPI description file for the Current Weather Data API
-  </Card>
-</CardGroup>
+```bash
+curl "https://api.openweathermap.org/data/2.5/weather?lat=48.85&lon=2.35&units=metric&appid=YOUR_API_KEY"
+```
+
+Replace `YOUR_API_KEY` with your OpenWeather API key.
+
+By default, the API returns temperature in Kelvin.  
+Use `units=metric` or `units=imperial` to control the output.
