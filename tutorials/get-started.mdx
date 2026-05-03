@@ -1,6 +1,6 @@
 ---
 title: Make your first API call
-description: 'Learn how to call the Current Weather Data API.'
+description: Learn how to call the Current Weather Data API.
 ---
 
 The Current Weather Data API provides access to weather data for any location worldwide.
@@ -13,7 +13,8 @@ In this tutorial, you will make your first call to the Current Weather Data API.
     1. Go to [https://home.openweathermap.org/users/sign_up](https://home.openweathermap.org/users/sign_up).
     2. Fill in the form with the required info.
     3. Click **Create account**.
-    4. In the confirmation email, click **Verify your email**.\
+    4. In the confirmation email, click **Verify your email**.
+
     Without a verified email address, you won't be able to use the Current Weather Data API.
 
     Once your email address has been successfully confirmed, you can [sign in to your account](https://openweathermap.org/home/sign_in).
@@ -23,29 +24,32 @@ In this tutorial, you will make your first call to the Current Weather Data API.
 
     1. [Sign in to your account](https://openweathermap.org/home/sign_in).
     2. In the top menu, click your name > **My API keys**.
-    
+
     Your API key is listed under the **Key** column.
 
     <Info>Make sure the status of your API key is **Active**. If the status is **Inactive**, click the toggle icon to activate your API key.</Info>
   </Step>
   <Step title="Make your first call">
   Now that you have your API key, you are ready to make your first call to the Current Weather Data API.
-  
-  The following example shows how to get the current weather in Paris, France, using cURL in a terminal.
+
+  The following example shows how to get the current weather in Paris, France, using curl in a terminal.
 
     1. Open your terminal.
-    2. Copy and paste the following code snippet.\
-       Replace `API_KEY` with your API key from Step 2.
-        ```curl
+    2. Copy and paste the following code snippet.
+
+       Replace `<API_KEY>` with your API key from Step 2.
+        ```bash
         curl --request GET \
-        --url 'https://api.openweathermap.org/data/2.5/weather?lat=48.8534&lon=2.3488&appid=API_KEY'
+          --url 'https://api.openweathermap.org/data/2.5/weather?lat=48.8534&lon=2.3488&appid=<API_KEY>'
         ```
-        The URL `https://api.openweathermap.org/data/2.5/weather` is the endpoint for the Current Weather Data API.\
-        The `lat` and `lon` parameters specify the geographic coordinates for the location you want to retrieve weather data for. In this example, we're using the coordinates for Paris, France.\
+        The URL `https://api.openweathermap.org/data/2.5/weather` is the endpoint for the Current Weather Data API.
+
+        The `lat` and `lon` parameters specify the geographic coordinates for the location you want to retrieve weather data for. In this example, we're using the coordinates for Paris, France.
+
         The `appid` parameter is where you need to provide your API key.
 
         OpenWeather recommends using the Geocoding API to convert city names or ZIP codes into coordinates, and notes that the built-in geocoder is deprecated.
-  
+
   The JSON response should look something like this:
         ```json
         {
@@ -105,7 +109,7 @@ In this tutorial, you will make your first call to the Current Weather Data API.
       * `temp_min` and `temp_max`: Optional min and max temperatures observed at the current moment within a large city or urban area. These can differ from `temp` due to variations across the area.
       At the time of the API call, `289.28` is the Kelvin temperature (`main.temp`).
     * The `wind` object includes:
-      * `speed`: Wind speed in meters/second.
+      * `speed`: Wind speed in meters per second.
       * `deg`: Wind direction in degrees.
       * `gust`: Wind gust (optional and only present when available).
     * The `clouds` object shows the cloudiness percentage (`all`).
@@ -121,12 +125,12 @@ In this tutorial, you will make your first call to the Current Weather Data API.
   * **400 Bad Request**: You’re missing required query parameters (for example, `lat` or `lon`).
   * **429 Too Many Requests**: You’ve exceeded the rate limit. Wait at least a minute before retrying.
 
-For a detailed description of the API response, see the <a href="/api-reference">API reference documentation</a>.
+For a detailed description of the API response, see the <a href="/api-reference/current-weather-data">API reference documentation</a>.
   </Step>
   <Step title="Next steps">
     You've successfully made your first call to the Current Weather Data API. You can now explore more features offered by the API, such as:
 
     - Getting data in HTML and XML formats
-    - Getting data for imperial and metric systems of measurement
+    - Getting data in imperial and metric units of measurement
   </Step>
 </Steps>

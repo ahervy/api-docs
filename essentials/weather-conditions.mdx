@@ -7,19 +7,19 @@ The Current Weather Data API provides detailed weather data, including weather c
 
 Understanding these weather conditions and icons helps you build apps that display accurate and visually appealing weather data.
 
+Example response:
 
-Example response (partial):
 ```json
-... 
+{
   "weather": [
-	{
-	  "id": 500,
-	  "main":"Rain",
-	  "description": "light rain",
-	  "icon": "10n"
-	}
-  ],
-...
+    {
+      "id": 500,
+      "main": "Rain",
+      "description": "light rain",
+      "icon": "10n"
+    }
+  ]
+}
 ```
 
 ## Weather icons
@@ -29,9 +29,9 @@ These icons can be displayed in your apps to provide users with a visual represe
 
 To retrieve the URL for a specific weather icon, use the following format:
 
-`https://openweathermap.org/img/wn/{{ICON_CODE}}@2x.png`
+`https://openweathermap.org/img/wn/<ICON_CODE>@2x.png`
 
-Replace `{ICON_CODE}` with the appropriate icon code from the API response (for example, `10n` for light rain).  
+Replace `<ICON_CODE>` with the appropriate icon code from the API response (for example, `10n` for light rain).
 Icon codes ending in `d` are for daytime, and those ending in `n` are for nighttime.
 
 The following sections include the icon list and commonly used weather condition codes.
@@ -74,7 +74,7 @@ This group represents various types of thunderstorms.
 
 #### Group 3xx: Drizzle
 
-This group represents various types of drizzles as well as combinations with rain.
+This group represents various types of drizzle as well as combinations with rain.
 
 | Code | Description | Icon |
 | --- | --- | --- |
@@ -89,6 +89,7 @@ This group represents various types of drizzles as well as combinations with rai
 | 321 | Shower drizzle | <img src="https://openweathermap.org/img/wn/09d.png" noZoom/> <code>09d</code> |
 
 #### Group 7xx: Atmosphere
+
 This group represents various types of atmospheric conditions.
 
 | Code | Description | Icon |
