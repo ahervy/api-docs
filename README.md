@@ -1,9 +1,8 @@
-# API Documentation Portfolio
+# API Documentation Prototype
 
 This repository contains a documentation prototype built with Mintlify, based on OpenWeather's Current Weather Data API.
 
-🔗 Live documentation: <https://arnaud.mintlify.app/introduction>  
-🔗 Portfolio case study: <https://arnaudhervy.com/portfolio/api-docs/>
+Live documentation: <https://arnaud.mintlify.app/introduction>
 
 ## Overview
 
@@ -30,4 +29,4 @@ It focuses on:
 
 ## Purpose
 
-This is a portfolio project showcasing how to design developer-friendly API documentation, with an emphasis on clarity, usability, and real-world integration concerns.
+This prototype explores developer-friendly API documentation, with an emphasis on clarity, usability, and practical integration workflows.
